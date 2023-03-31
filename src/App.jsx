@@ -1,6 +1,6 @@
 import { BrowserRouter } from "react-router-dom";
 import About from "./components/components/About";
-import { StarsCanvas } from "./components/components/canvas/Stars";
+import StarsCanvas from "./components/components/canvas/Stars";
 import Contact from "./components/components/Contact";
 import Experience from "./components/components/Experience";
 import Feedbacks from "./components/components/Feedbacks";
