@@ -29,9 +29,9 @@ const Contact = () => {
     "template_gb9f9h2",
     {
      form_name: form.name,
-     to_name: "Jashan",
-     from_email: from.email,
-     to_email: "jashandhiman.armymaxer@gmail.com",
+     to_name: "Jashan Dhiman",
+     from_email: form.email,
+     to_email: "jashandhiman.hulk@gmail.com",
      message: form.message,
     },
     "E9ss36pzD78Bw-IJE"
