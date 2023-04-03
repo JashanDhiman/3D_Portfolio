@@ -19,11 +19,8 @@ const ExperienceCard = ({ experience }) => (
    </div>
   }
  >
-  <div className="flex justify-center items-center w-full h-full">
-   <h3 className="text-white text-[24px] font-bold">{experience.date}</h3>
-   <p className="text-secondary text-[16px] font-semibold" style={{ margin: 0 }}>
-    {experience.company_name}
-   </p>
+  <div className="flex justify-center items-center w-full h-full mb-2 gap-2">
+   <h3 className="text-white text-[24px] font-bold">{experience.company_name}</h3>
   </div>
   <ul className="mt5">
    {experience.points.map((point, index) => (
