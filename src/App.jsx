@@ -11,7 +11,7 @@ import Works from "./components/components/Works";
 
 const App = () => {
  return (
-  <BrowserRouter>
+  <BrowserRouter basename="/3D_Portfolio">
    <div className="relative z-0 bg-primary">
     <div className="bg-hero-pattern bg-cover bg-no-repeat bg-center">
      <Navbar />
