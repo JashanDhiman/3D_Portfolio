@@ -1,5 +1,5 @@
 import { styles } from "../../styles";
-import { github } from "../../assets";
+import { github, externalLink } from "../../assets";
 import SectionWrapper from "../../hoc/SectionWrapper";
 import { projects } from "../../constants";
 import { fadeIn, textVariant } from "../../utils/motion";
@@ -15,11 +15,7 @@ export const ProjectCard = ({ index, name, description, tags, image, source_code
      <div className="absolute inset-0 flex justify-end m-3 card-img_hover gap-2">
       {link && (
        <div onClick={() => window.open(link, "_blank")} className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-         <polyline points="15 3 21 3 21 9" />
-         <line x1="10" y1="14" x2="21" y2="3" />
-        </svg>
+        <img src={externalLink} alt="live site" className="w-1/2 h-1/2 object-contain" />
        </div>
       )}
       {source_code_link ? (
