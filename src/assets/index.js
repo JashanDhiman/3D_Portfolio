@@ -21,46 +21,42 @@ import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 
-import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
-import starbucks from "./company/starbucks.png";
-import tesla from "./company/tesla.png";
 import cueblocks from "./company/cueblocks.png";
 import smartdata from "./company/smartdata.png";
 
-import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
+import soundHealerImg from "./projects/sound-healer.png";
+import wellnessImg from "./projects/fitness.png";
+import memoriesTimelineImg from "./projects/memories-timeline.png";
+import chatWebImg from "./projects/chat-web.png";
 
 export {
-    logo,
-    backend,
-    creator,
-    mobile,
-    web,
-    github,
-    menu,
-    close,
-    css,
-    docker,
-    figma,
-    git,
-    html,
-    javascript,
-    mongodb,
-    nodejs,
-    reactjs,
-    redux,
-    tailwind,
-    typescript,
-    threejs,
-    meta,
-    shopify,
-    starbucks,
-    tesla,
-    carrent,
-    jobit,
-    tripguide,
-    cueblocks,
-    smartdata,
+  logo,
+  backend,
+  creator,
+  mobile,
+  web,
+  github,
+  menu,
+  close,
+  css,
+  docker,
+  figma,
+  git,
+  html,
+  javascript,
+  mongodb,
+  nodejs,
+  reactjs,
+  redux,
+  tailwind,
+  typescript,
+  threejs,
+  shopify,
+  cueblocks,
+  smartdata,
+  soundHealerImg,
+  wellnessImg,
+  memoriesTimelineImg,
+  chatWebImg,
 };

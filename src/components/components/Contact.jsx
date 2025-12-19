@@ -5,6 +5,8 @@ import SectionWrapper from "../../hoc/SectionWrapper";
 import { slideIn } from "../../utils/motion";
 import EarthCanvas from "./canvas/Earth";
 import emailjs from "@emailjs/browser";
+import { toast } from "../toast/toast";
+import { isValidEmail } from "../../utils/extra";
 
 const Contact = () => {
  const formRef = useRef();
@@ -22,6 +24,15 @@ const Contact = () => {
 
  const handleSubmit = (e) => {
   e.preventDefault();
+  if (!form.name || !form.email || !form.message) {
+   toast.error("Please fill in all fields");
+   return;
+  }
+  if (!isValidEmail(form.email)) {
+   toast.error("Please enter a valid email address");
+   return;
+  }
+
   setLoading(true);
   emailjs
    .send(
@@ -39,7 +50,7 @@ const Contact = () => {
    .then(
     () => {
      setLoading(false);
-     alert("Thank you, I will get back to you soon!");
+     toast.success("Thank you, I will get back to you soon!");
      setFrom({
       name: "",
       email: "",
@@ -49,7 +60,7 @@ const Contact = () => {
     (error) => {
      setLoading(false);
      console.log(error);
-     alert("something went wrong");
+     toast.error("something went wrong");
     }
    );
  };
@@ -74,7 +85,7 @@ const Contact = () => {
      <label className="flex flex-col">
       <span className="text-white font-medium mb-4">Your Email</span>
       <input
-       type="text"
+       type="email"
        name="email"
        value={form.email}
        onChange={handleChange}

@@ -22,7 +22,11 @@ const FeedbackCard = ({ index, testimonial, name, designation, company, image })
        {designation} of {company}
       </p>
      </div>
-     <img src={image} alt={`feedback-by-${name}`} className="w-10 h-10 rounded-full object-cover" />
+     {image ? (
+      <img src={image} alt={`feedback-by-${name}`} className="w-10 h-10 rounded-full object-cover" />
+     ) : (
+      <div className="w-10 h-10 rounded-full object-cover bg-gray-500 flex items-center justify-center text-white">N/A</div>
+     )}
     </div>
    </div>
   </motion.div>

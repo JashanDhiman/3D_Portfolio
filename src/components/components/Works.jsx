@@ -6,16 +6,27 @@ import { fadeIn, textVariant } from "../../utils/motion";
 import { motion } from "framer-motion";
 import Tilt from "react-tilt";
 
-export const ProjectCard = ({ index, name, description, tags, image, source_code_link }) => {
+export const ProjectCard = ({ index, name, description, tags, image, source_code_link, link }) => {
  return (
   <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
    <Tilt options={{ max: 45, scale: 1, speed: 450 }} className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full">
     <div className="relative w-full h-[230px]">
      <img src={image} alt={name} className="w-full h-full object-cover rounded-2xl" />
-     <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-      {source_code_link ? <div onClick={() => window.open(source_code_link, "_blank")} className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer">
-       <img src={github} alt="github" className="w-1/2 h-1/2 object-contain" />
-      </div> : null}
+     <div className="absolute inset-0 flex justify-end m-3 card-img_hover gap-2">
+      {link && (
+       <div onClick={() => window.open(link, "_blank")} className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+         <polyline points="15 3 21 3 21 9" />
+         <line x1="10" y1="14" x2="21" y2="3" />
+        </svg>
+       </div>
+      )}
+      {source_code_link ? (
+       <div onClick={() => window.open(source_code_link, "_blank")} className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer">
+        <img src={github} alt="github" className="w-1/2 h-1/2 object-contain" />
+       </div>
+      ) : null}
      </div>
     </div>
 
