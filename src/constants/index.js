@@ -290,7 +290,7 @@ const projects = [
       },
     ],
     image: memoriesTimelineImg,
-    link: 'https://prerna-gift.netlify.app/memories-timeline',
+    link: 'https://memories-timeline.netlify.app/',
     source_code_link: "https://github.com/JashanDhiman/memories-timeline",
   },
   {
