@@ -18,8 +18,9 @@ const Navbar = () => {
       setActive("");
       window.scrollTo(0, 0);
      }}
+     aria-label="Home"
     >
-     <img src={logo} alt="logo" className="w-9 h--9 object-contain" />
+     <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
      <p className="text-white text-[18px] font-bold cursor-pointer flex">
       Jashan &nbsp;<span className="sm:block hidden">| Nirvana</span>
      </p>
@@ -32,7 +33,7 @@ const Navbar = () => {
      ))}
     </ul>
     <div className="sm:hidden flex flex-1 justify-end items-center">
-     <img src={toggle ? close : menu} alt="menu" className="w-[28px] h-[28px] object-contain cursor-pointer" onClick={() => setToggle(!toggle)} />
+     <img src={toggle ? close : menu} alt="menu" className="w-[28px] h-[28px] object-contain cursor-pointer" onClick={() => setToggle(!toggle)} aria-label="Toggle menu" aria-expanded={toggle} />
      <div className={`${!toggle ? "hidden" : "flex"} p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}>
       <ul className="list-none flex justify-end items-start flex-col gap-4">
        {navLinks.map((link) => (

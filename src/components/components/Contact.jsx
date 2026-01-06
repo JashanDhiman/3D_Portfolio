@@ -1,9 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { styles } from "../../styles";
 import SectionWrapper from "../../hoc/SectionWrapper";
 import { slideIn } from "../../utils/motion";
-import EarthCanvas from "./canvas/Earth";
+// import EarthCanvas from "./canvas/Earth";
+const EarthCanvas = lazy(() => import("./canvas/Earth"));
 import emailjs from "@emailjs/browser";
 import { toast } from "../toast/toast";
 import { isValidEmail } from "../../utils/extra";
@@ -79,6 +80,8 @@ const Contact = () => {
        value={form.name}
        onChange={handleChange}
        placeholder="What's your name?"
+       aria-label="Name"
+       required
        className=" bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium"
       />
      </label>
@@ -90,6 +93,8 @@ const Contact = () => {
        value={form.email}
        onChange={handleChange}
        placeholder="What's your email?"
+       aria-label="Email"
+       required
        className=" bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium"
       />
      </label>
@@ -101,17 +106,21 @@ const Contact = () => {
        value={form.message}
        onChange={handleChange}
        placeholder="What do you want to say?"
-       className=" bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium"
+       aria-label="Message"
+       required
+       className="h-40 bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outlined-none border-none font-medium resize-none"
       />
      </label>
-     <button type="submit" className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl">
+     <button type="submit" className="bg-tertiary py-3 px-8 outline-none w-fit text-white font-bold shadow-md shadow-primary rounded-xl" aria-label="Send Message">
       {loading ? "Sending..." : "Send"}
      </button>
     </form>
    </motion.div>
 
    <motion.div variants={slideIn("right", "tween", 0.2, 1)} className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]">
-    <EarthCanvas />
+    <Suspense fallback={null}>
+     <EarthCanvas />
+    </Suspense>
    </motion.div>
   </div>
  );

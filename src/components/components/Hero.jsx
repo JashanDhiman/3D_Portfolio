@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { styles } from "../../styles";
-import { ComputersCanvas } from "./canvas";
+// import { ComputersCanvas } from "./canvas";
+const ComputersCanvas = lazy(() => import("./canvas/Computers"));
 
 const Hero = () => {
  return (
@@ -12,14 +13,16 @@ const Hero = () => {
     </div>
     <div>
      <h1 className={`${styles.heroHeadText} text-white`}>
-      Hi, I'am <span className="text-[#915eff]">Jashan</span>
+      Hi, I'm <span className="text-[#915eff]">Jashan</span>
      </h1>
      <p className={`${styles.heroSubText} mt-2 text-white-100`}>
       I Develop user interfaces and <br className="sm:block hidden" /> web applications.
      </p>
     </div>
    </div>
-   <ComputersCanvas />
+   <Suspense fallback={null}>
+    <ComputersCanvas />
+   </Suspense>
   </section>
  );
 };
