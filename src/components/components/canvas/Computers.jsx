@@ -42,7 +42,15 @@ const ComputersCanvas = () => {
  }, []);
 
  return (
-  <Canvas frameloop="demand" shadows dpr={[1, 2]} camera={{ position: [20, 3, 5], fov: 25 }} gl={{ preserveDrawingBuffer: true }} aria-label="3D Desktop PC model" role="img">
+  <Canvas 
+   frameloop="demand" 
+   shadows 
+   dpr={[1, 1.5]} 
+   camera={{ position: [20, 3, 5], fov: 25 }} 
+   gl={{ preserveDrawingBuffer: true, powerPreference: "high-performance", antialias: false }} 
+   aria-label="3D Desktop PC model" 
+   role="img"
+  >
    <Suspense fallback={<CanvasLoader />}>
     <OrbitControls enableZoom={false} maxPolarAngle={Math.PI / 2} minPolarAngle={Math.PI / 2} />
     <Computers isMobile={isMobile} />
