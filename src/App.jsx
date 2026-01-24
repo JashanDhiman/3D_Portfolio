@@ -1,15 +1,14 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter } from "react-router-dom";
-import About from "./components/components/About";
-// import StarsCanvas from "./components/components/canvas/Stars";
+const About = lazy(() => import("./components/components/About"));
 const StarsCanvas = lazy(() => import("./components/components/canvas/Stars"));
-import Contact from "./components/components/Contact";
-import Experience from "./components/components/Experience";
-import Feedbacks from "./components/components/Feedbacks";
+const Contact = lazy(() => import("./components/components/Contact"));
+const Experience = lazy(() => import("./components/components/Experience"));
+const Feedbacks = lazy(() => import("./components/components/Feedbacks"));
 import Hero from "./components/components/Hero";
 import Navbar from "./components/components/Navbar";
-import Tech from "./components/components/Tech";
-import Works from "./components/components/Works";
+const Tech = lazy(() => import("./components/components/Tech"));
+const Works = lazy(() => import("./components/components/Works"));
 import { ToastProvider, useToast } from "./components/toast/ToastContext";
 import { registerToast } from "./components/toast/toast";
 
@@ -29,17 +28,19 @@ const App = () => {
       <Navbar />
       <Hero />
      </div>
-     <About />
-     <Experience />
-     <Tech />
-     <Works />
-     <Feedbacks />
-     <div className="realative z-0">
-      <Contact />
       <Suspense fallback={null}>
-       <StarsCanvas />
+        <About />
+        <Experience />
+        <Tech />
+        <Works />
+        <Feedbacks />
       </Suspense>
-     </div>
+      <div className="realative z-0">
+        <Suspense fallback={null}>
+          <Contact />
+          <StarsCanvas />
+        </Suspense>
+      </div>
     </div>
    </ToastProvider>
   </BrowserRouter>

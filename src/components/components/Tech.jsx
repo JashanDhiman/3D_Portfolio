@@ -1,5 +1,4 @@
 import React, { Suspense, lazy } from "react";
-// import { BallCanvas } from "./canvas";
 const BallCanvas = lazy(() => import("./canvas/Ball"));
 import SectionWrapper from "../../hoc/SectionWrapper";
 import { technologies } from "../../constants";
