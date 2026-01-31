@@ -22,6 +22,7 @@ import {
   soundHealerImg,
   memoriesTimelineImg,
   wellnessImg,
+  tradingDashboardImg,
 } from "../assets";
 
 export const navLinks = [
@@ -227,6 +228,28 @@ const testimonials = [
 ];
 
 const projects = [
+  {
+    name: "Trading Dashboard",
+    description:
+      "Web-based platform that allows users to track their trading activities and analyze market trends.",
+    tags: [
+      {
+        name: "react",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "firebase",
+        color: "green-text-gradient",
+      },
+      {
+        name: "tailwind",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: tradingDashboardImg,
+    link: "https://nubra-dashboard.vercel.app",
+    source_code_link: "https://github.com/JashanDhiman/trading-dashboard",
+  },
   {
     name: "Chat Web App",
     description:

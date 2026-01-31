@@ -31,6 +31,7 @@ import soundHealerImg from "./projects/sound-healer.png";
 import wellnessImg from "./projects/fitness.png";
 import memoriesTimelineImg from "./projects/memories-timeline.png";
 import chatWebImg from "./projects/chat-web.png";
+import tradingDashboardImg from "./projects/trading-dashboard.png";
 
 export {
   logo,
@@ -63,4 +64,5 @@ export {
   wellnessImg,
   memoriesTimelineImg,
   chatWebImg,
+  tradingDashboardImg,
 };
