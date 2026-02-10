@@ -61,13 +61,3 @@ Build the app for production:
 npm run build
 ```
 The build artifacts will be stored in the `dist/` directory.
-
-## 📝 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 🤝 Contact
-
-Jashan Dhiman - [GitHub](https://github.com/JashanDhiman)
-
-Project Link: [https://github.com/JashanDhiman/3D_Portfolio](https://github.com/JashanDhiman/3D_Portfolio)
