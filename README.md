@@ -6,7 +6,7 @@ A stunning, responsive 3D developer portfolio built with React, Three.js, and Ta
 
 Check out the live site here: [https://jd-3d-portfolio.netlify.app/](https://jd-3d-portfolio.netlify.app/)
 
-[![Jashan's GitHub stats](https://github-readme-stats.vercel.app/api?username=JashanDhiman&show_icons=true&theme=radical)](https://github.com/anuraghazra/github-readme-stats)
+<!--[![Jashan's GitHub stats](https://github-readme-stats.vercel.app/api?username=JashanDhiman&show_icons=true&theme=radical)]-->
 [![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=JashanDhiman&theme=radical)](https://git.io/streak-stats)
 
 ## ✨ Features
