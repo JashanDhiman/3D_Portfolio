@@ -3,8 +3,7 @@ import { motion } from "framer-motion";
 import { styles } from "../../styles";
 import SectionWrapper from "../../hoc/SectionWrapper";
 import { slideIn } from "../../utils/motion";
-// import EarthCanvas from "./canvas/Earth";
-const EarthCanvas = lazy(() => import("./canvas/Earth"));
+//const EarthCanvas = lazy(() => import("./canvas/Earth"));
 import emailjs from "@emailjs/browser";
 import { toast } from "../toast/toast";
 import { isValidEmail } from "../../utils/extra";
@@ -67,7 +66,7 @@ const Contact = () => {
  };
 
  return (
-  <div className="xl:mt-12 xl:flex-row flex-col-reverse flex gap-10 overflow-hidden">
+  <div className="xl:mt-12 xl:flex-row w-[60%] flex-col-reverse flex gap-10 overflow-hidden">
    <motion.div variants={slideIn("left", "tween", 0.2, 1)} className="flex-[0.75] bg-black-100 p-8 rounded-2xl">
     <p className={styles.sectionSubText}>Get in touch</p>
     <h3 className={styles.sectionHeadText}>Contact Me.</h3>
@@ -117,11 +116,11 @@ const Contact = () => {
     </form>
    </motion.div>
 
-   <motion.div variants={slideIn("right", "tween", 0.2, 1)} className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]">
+   {/*<motion.div variants={slideIn("right", "tween", 0.2, 1)} className="xl:flex-1 xl:h-auto md:h-[550px] h-[350px]">
     <Suspense fallback={null}>
      <EarthCanvas />
     </Suspense>
-   </motion.div>
+   </motion.div>*/}
   </div>
  );
 };
