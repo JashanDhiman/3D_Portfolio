@@ -9,8 +9,8 @@ import SectionWrapper from "../../hoc/SectionWrapper";
 
 const ServiceCard = ({ index, title, icon }) => (
   <Tilt
-    tiltMaxAngleX={45}
-    tiltMaxAngleY={45}
+    tiltMaxAngleX={15}
+    tiltMaxAngleY={15}
     scale={1}
     transitionSpeed={450}
     className="xs:w-[250px] w-full"

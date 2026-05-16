@@ -7,7 +7,7 @@ import { Earth } from "./Earth";
 
 const AnimatedEarth = ({ x, scale }) => {
   const groupRef = useRef();
-  
+
   useFrame(() => {
     if (groupRef.current) {
       groupRef.current.position.x = x.get();
@@ -38,11 +38,11 @@ const SceneCanvas = () => {
 
   // Scroll mapping
   // 0: Hero (Top) - Right
-  // 0.4: Middle (About/Experience) - Center, Scale Down
-  // 0.8: Projects/Feedbacks - Center, Scale Down
+  // 0.1: About section - Scale Down
+  // 0.9: Feedbacks section - Scale Down
   // 1: Contact (Bottom) - Right, Scale Up
-  const earthX = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [isMobile ? 0 : 3.5, 0, 0, isMobile ? 0 : 3.5]);
-  const earthScale = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [1, 0.6, 0.6, 1]);
+  const earthX = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [isMobile ? 0 : 7, 0, 0, isMobile ? 0 : 7]);
+  const earthScale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [isMobile ? 0.6 : 1, isMobile ? 0.4 : 0.6, isMobile ? 0.4 : 0.6, isMobile ? 0.6 : 1]);
 
   return (
     <div className="w-full h-full fixed inset-0 z-[-1] bg-primary pointer-events-none">
@@ -62,18 +62,18 @@ const SceneCanvas = () => {
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
           <directionalLight position={[10, 10, 5]} intensity={1.5} />
-          
+
           {/* Stars background */}
           <Stars />
 
           {/* Floating Earth model */}
           <AnimatedEarth x={earthX} scale={earthScale} />
-          
-          <OrbitControls 
-            enableZoom={false} 
-            maxPolarAngle={Math.PI / 2} 
-            minPolarAngle={Math.PI / 2} 
-            autoRotate
+
+          <OrbitControls
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          // Manual rotation is handled in Earth/Stars components
           />
         </Suspense>
         <Preload all />
