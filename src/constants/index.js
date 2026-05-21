@@ -335,7 +335,7 @@ const projects = [
       },
     ],
     image: soundHealerImg,
-    //link: "https://sound-healer.netlify.app/",
+    link: "https://joyful-soul-jd.netlify.app/login?email=test@yopmail.com&password=Test@123",
     source_code_link: null,
   },
 
