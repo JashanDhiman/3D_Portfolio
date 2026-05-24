@@ -120,11 +120,27 @@ const technologies = [
 
 const experiences = [
   {
+    title: "Freelance Full Stack Developer",
+    // TODO: swap for the real NirvanaSage logo once available (src/assets/company/)
+    company_name: "NirvanaSage",
+    icon: creator,
+    iconBg: "#383E56",
+    date: "sep 2020 - jan 2022",
+    technologies: ["React", "Node.js", "Express", "Firebase", "Django", "Python", "Three.js", "GSAP"],
+    points: [
+      "Built multiple applications for the healthcare and wellness industry, including a web platform for diet plans, fitness routines and meditation techniques.",
+      "Developed a Sound Healing program that uses signal processing to generate therapeutic audio for patients with depression, anxiety and stress, reaching 80% accuracy in voice analysis.",
+      "Built a 3D brain visualization with Three.js that turns diagnoses and treatment records into visual reports, letting doctors pinpoint problem areas with 60% accuracy.",
+      "Improved UI/UX by 70% using AI-assisted design workflows, working directly with the founder to shape the product.",
+    ],
+  },
+  {
     title: "Web Developer",
     company_name: "Cue Blocks",
     icon: cueblocks,
     iconBg: "#383E56",
     date: "feb 2022 - nov 2022",
+    technologies: ["React.js", "JavaScript", "Shopify Apps", "Responsive UI", "Cross-browser"],
     points: [
       "Developed and maintained web applications using React.js and other related technologies.",
       "Implemented responsive design and ensured cross-browser compatibility.",
@@ -138,6 +154,7 @@ const experiences = [
     icon: smartdata,
     iconBg: "#383E56",
     date: "nov 2022 - Present",
+    technologies: ["React.js", "Node.js", "FHIR", "HIPAA", "PHI", "Code Review"],
     points: [
       "Developing and maintaining Healthcare Platforms using React.js and nodeJS with taking-care of FHIR, HIPAA and PHI.",
       "Optimizing application for maximum speed and scalability.",
