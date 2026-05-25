@@ -93,6 +93,22 @@
  }
 }
 
+/* hero scroll cue */
+@keyframes hero-beam {
+ 0% {
+  transform: translateY(-140%);
+  opacity: 0;
+ }
+ 20%,
+ 75% {
+  opacity: 1;
+ }
+ 100% {
+  transform: translateY(420%);
+  opacity: 0;
+ }
+}
+
 /* canvas- styles */
 .canvas-loader {
  font-size: 10px;
