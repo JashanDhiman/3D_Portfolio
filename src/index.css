@@ -81,6 +81,25 @@
  }
 }
 
+/* contact form: shockwave where the plane hits the planet */
+.plane-impact {
+ animation: plane-impact 420ms ease-out forwards;
+}
+
+@keyframes plane-impact {
+ 0% {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.3);
+ }
+ 30% {
+  opacity: 0.85;
+ }
+ 100% {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.3);
+ }
+}
+
 @keyframes exp-pulse {
  0%,
  100% {
