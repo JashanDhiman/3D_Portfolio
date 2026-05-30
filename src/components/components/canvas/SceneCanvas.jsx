@@ -5,6 +5,7 @@ import { OrbitControls, Preload } from "@react-three/drei";
 import { useScroll, useTransform } from "framer-motion";
 import { Stars } from "./Stars";
 import { Earth } from "./Earth";
+import TechBalls from "./TechBalls";
 import { setEarthTarget, clearEarthTarget } from "../../../utils/earthTarget";
 
 const AnimatedEarth = ({ x, scale }) => {
@@ -106,6 +107,12 @@ const SceneCanvas = () => {
 
           {/* Floating Earth model */}
           <AnimatedEarth x={earthX} scale={earthScale} />
+
+          {/* Tech balls: orbit the Earth, dock onto the Tech grid as it scrolls in.
+              Own Suspense boundary so the icon textures cannot blank the scene. */}
+          <Suspense fallback={null}>
+            <TechBalls x={earthX} scale={earthScale} />
+          </Suspense>
 
           <OrbitControls
             enableZoom={false}

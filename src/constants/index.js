@@ -12,6 +12,7 @@ import {
   tailwind,
   nodejs,
   mongodb,
+  postgres,
   git,
   figma,
   shopify,
@@ -96,10 +97,10 @@ const technologies = [
     name: "MongoDB",
     icon: mongodb,
   },
-  //{
-  //    name: "Three JS",
-  //    icon: threejs,
-  //},
+  {
+    name: "Postgres",
+    icon: postgres,
+  },
   {
     name: "git",
     icon: git,
@@ -126,7 +127,16 @@ const experiences = [
     icon: creator,
     iconBg: "#383E56",
     date: "sep 2020 - jan 2022",
-    technologies: ["React", "Node.js", "Express", "Firebase", "Django", "Python", "Three.js", "GSAP"],
+    technologies: [
+      "React",
+      "Node.js",
+      "Express",
+      "Firebase",
+      "Django",
+      "Python",
+      "Three.js",
+      "GSAP",
+    ],
     points: [
       "Built multiple applications for the healthcare and wellness industry, including a web platform for diet plans, fitness routines and meditation techniques.",
       "Developed a Sound Healing program that uses signal processing to generate therapeutic audio for patients with depression, anxiety and stress, reaching 80% accuracy in voice analysis.",
@@ -140,7 +150,13 @@ const experiences = [
     icon: cueblocks,
     iconBg: "#383E56",
     date: "feb 2022 - nov 2022",
-    technologies: ["React.js", "JavaScript", "Shopify Apps", "Responsive UI", "Cross-browser"],
+    technologies: [
+      "React.js",
+      "JavaScript",
+      "Shopify Apps",
+      "Responsive UI",
+      "Cross-browser",
+    ],
     points: [
       "Developed and maintained web applications using React.js and other related technologies.",
       "Implemented responsive design and ensured cross-browser compatibility.",
@@ -154,7 +170,14 @@ const experiences = [
     icon: smartdata,
     iconBg: "#383E56",
     date: "nov 2022 - Present",
-    technologies: ["React.js", "Node.js", "FHIR", "HIPAA", "PHI", "Code Review"],
+    technologies: [
+      "React.js",
+      "Node.js",
+      "FHIR",
+      "HIPAA",
+      "PHI",
+      "Code Review",
+    ],
     points: [
       "Developing and maintaining Healthcare Platforms using React.js and nodeJS with taking-care of FHIR, HIPAA and PHI.",
       "Optimizing application for maximum speed and scalability.",
@@ -308,8 +331,8 @@ const projects = [
       },
     ],
     image: wellnessImg,
-    link: 'https://jashandhiman.pythonanywhere.com/',
-    source_code_link: 'https://github.com/JashanDhiman/wellness_clone',
+    link: "https://jashandhiman.pythonanywhere.com/",
+    source_code_link: "https://github.com/JashanDhiman/wellness_clone",
   },
   {
     name: "Memories Timeline",
@@ -330,7 +353,7 @@ const projects = [
       },
     ],
     image: memoriesTimelineImg,
-    link: 'https://memories-timeline.netlify.app/',
+    link: "https://memories-timeline.netlify.app/",
     source_code_link: "https://github.com/JashanDhiman/memories-timeline",
   },
   {
@@ -355,7 +378,6 @@ const projects = [
     link: "https://joyful-soul-jd.netlify.app/login?email=test@yopmail.com&password=Test@123",
     source_code_link: null,
   },
-
 ];
 
 export { services, technologies, experiences, testimonials, projects };
