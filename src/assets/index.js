@@ -1,15 +1,13 @@
-import logo from "./logo.png";
-import backend from "./backend.png";
-import creator from "./creator.png";
-import mobile from "./mobile.png";
-import web from "./web.png";
-import github from "./github.png";
+// Raster assets are WebP, exported at 2x the largest box they render in.
+// Nothing here ships more pixels than the layout can show. SVGs stay as SVGs.
+import logo from "./logo.webp";
+import creator from "./creator.webp";
+import github from "./github.webp";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import externalLink from "./external-link.svg";
 
 import css from "./tech/css.svg";
-import docker from "./tech/docker.png";
 import figma from "./tech/figma.png";
 import git from "./tech/git.png";
 import html from "./tech/html.svg";
@@ -20,31 +18,26 @@ import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.svg";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.svg";
-import threejs from "./tech/threejs.svg";
 import postgres from "./tech/postgres.svg";
 
-import shopify from "./company/shopify.png";
-import cueblocks from "./company/cueblocks.png";
-import smartdata from "./company/smartdata.png";
+import shopify from "./company/shopify.webp";
+import cueblocks from "./company/cueblocks.webp";
+import smartdata from "./company/smartdata.webp";
 
-import soundHealerImg from "./projects/sound-healer.png";
-import wellnessImg from "./projects/fitness.png";
-import memoriesTimelineImg from "./projects/memories-timeline.png";
-import chatWebImg from "./projects/chat-web.png";
-import tradingDashboardImg from "./projects/trading-dashboard.png";
+import soundHealerImg from "./projects/sound-healer.webp";
+import wellnessImg from "./projects/fitness.webp";
+import memoriesTimelineImg from "./projects/memories-timeline.webp";
+import chatWebImg from "./projects/chat-web.webp";
+import tradingDashboardImg from "./projects/trading-dashboard.webp";
 
 export {
   logo,
-  backend,
   creator,
-  mobile,
-  web,
   github,
   menu,
   close,
   externalLink,
   css,
-  docker,
   figma,
   git,
   html,
@@ -55,7 +48,6 @@ export {
   redux,
   tailwind,
   typescript,
-  threejs,
   postgres,
   shopify,
   cueblocks,
