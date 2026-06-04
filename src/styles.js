@@ -3,8 +3,12 @@ const styles = {
     paddingY: "sm:py-16 py-6",
     padding: "sm:px-16 px-6 sm:py-16 py-10",
 
+    // leading was 98px against an 80px font — 1.22, loose enough for body copy and far
+    // too loose for a two-line display heading. 1.06 tightens it typographically and
+    // reclaims ~28px, which is what kept the hero's contact links above the fold on a
+    // 1280x800 laptop.
     heroHeadText:
-        "font-black text-white lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] lg:leading-[98px] mt-2",
+        "font-black text-white lg:text-[80px] sm:text-[60px] xs:text-[50px] text-[40px] leading-[1.06] mt-2",
     heroSubText:
         "text-[#dfd9ff] font-medium lg:text-[30px] sm:text-[26px] xs:text-[20px] text-[16px] lg:leading-[40px]",
 
