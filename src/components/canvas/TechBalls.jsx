@@ -1,10 +1,10 @@
-import React, { useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
 
-import { technologies } from "../../../constants";
-import { getTechSlots } from "../../../utils/techSlots";
+import { technologies } from "../../content";
+import { getTechSlots } from "../../utils/techSlots";
 import { BallMesh } from "./Ball";
 
 // The tech balls live in the persistent background scene rather than in a canvas
