@@ -1,18 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import SectionWrapper from "../../hoc/SectionWrapper";
-import { slideIn } from "../../utils/motion";
+import SectionWrapper from "../hoc/SectionWrapper";
+import { slideIn } from "../utils/motion";
 import emailjs from "@emailjs/browser";
-import { toast } from "../toast/toast";
-import { isValidEmail } from "../../utils/extra";
+import { toast } from "./toast/toast";
+import { isValidEmail } from "../utils/extra";
 import SendIcon from "./SendIcon";
 import PlaneFlight from "./PlaneFlight";
 
 const labelClass =
- "mb-2 block text-[10px] font-bold uppercase tracking-[0.16em] text-secondary/70";
+ "mb-2 block text-[10px] font-bold uppercase tracking-[0.16em] text-secondary/80";
 
 const fieldClass =
- "w-full rounded-lg border border-white/[0.07] bg-[#1b1b2b] px-4 py-3.5 text-[14px] font-medium text-white placeholder:text-secondary/45 outline-none transition-all duration-300 focus:border-[#22d3ee]/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.12)]";
+ "w-full rounded-lg border border-white/[0.07] bg-[#1b1b2b] px-4 py-3.5 text-[14px] font-medium text-white placeholder:text-secondary/70 outline-none transition-all duration-300 focus:border-[#22d3ee]/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.12)]";
 
 // Reduced-motion path only: how long "Transmitted" holds before the button rearms.
 // The animated path rearms when the plane finishes its run instead.

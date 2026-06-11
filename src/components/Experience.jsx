@@ -1,9 +1,8 @@
-import React from "react";
 import "react-vertical-timeline-component/style.min.css";
-import { styles } from "../../styles";
-import { experiences } from "../../constants";
-import SectionWrapper from "../../hoc/SectionWrapper";
-import { textVariant } from "../../utils/motion";
+import { styles } from "../styles";
+import { experiences } from "../content";
+import SectionWrapper from "../hoc/SectionWrapper";
+import { textVariant } from "../utils/motion";
 import { motion } from "framer-motion";
 import {
   VerticalTimeline,
@@ -91,6 +90,10 @@ const ExperienceCard = ({ experience }) => {
 
   return (
     <VerticalTimelineElement
+      // The library renders id="" when this is omitted, so three timeline entries
+      // meant three elements sharing an empty id — invalid, and it makes the
+      // entries unlinkable. Slug off the company name instead.
+      id={`role-${experience.company_name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
       contentStyle={{
         background: "transparent",
         boxShadow: "none",
@@ -119,6 +122,10 @@ const ExperienceCard = ({ experience }) => {
           <img
             src={experience.icon}
             alt={experience.company_name}
+            width={48}
+            height={48}
+            loading="lazy"
+            decoding="async"
             className="h-[72%] w-[72%] object-contain"
           />
         </div>
@@ -167,7 +174,7 @@ const ExperienceCard = ({ experience }) => {
 
             <div className="my-5 h-px bg-gradient-to-r from-[#804dee]/60 via-white/10 to-transparent" />
 
-            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-secondary/70">
+            <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-secondary/80">
               Key contributions
             </p>
 
@@ -195,6 +202,22 @@ const ExperienceCard = ({ experience }) => {
                 ))}
               </div>
             )}
+
+            {/* Moved here from the old standalone Testimonials section, which held a
+                single quote and rendered a grey "N/A" circle where an avatar would go.
+                A client's words sitting inside the role they are describing carry more
+                than the same words alone under a section heading. */}
+            {experience.testimonial && (
+              <figure className="mt-7 border-l-2 border-[#00cea8]/50 pl-5">
+                <blockquote className="text-[14px] italic leading-relaxed text-white-100/90">
+                  &ldquo;{experience.testimonial.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-secondary">
+                  {experience.testimonial.name}
+                  <span className="text-secondary/80"> · {experience.testimonial.designation}</span>
+                </figcaption>
+              </figure>
+            )}
           </div>
         </div>
       </div>
@@ -220,4 +243,4 @@ const Experience = () => {
   );
 };
 
-export default SectionWrapper(Experience, "work");
+export default SectionWrapper(Experience, "experience");

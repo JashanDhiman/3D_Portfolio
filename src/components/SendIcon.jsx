@@ -1,4 +1,3 @@
-import React from "react";
 
 const SendIcon = ({ className = "h-4 w-4" }) => (
  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className={className}>

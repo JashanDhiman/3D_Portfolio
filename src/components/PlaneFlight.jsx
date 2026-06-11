@@ -1,6 +1,6 @@
-import React, { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { getEarthTarget } from "../../utils/earthTarget";
+import { getEarthTarget } from "../utils/earthTarget";
 import SendIcon from "./SendIcon";
 
 // The plane leaves the submit button, curves into orbit around the Earth model,
