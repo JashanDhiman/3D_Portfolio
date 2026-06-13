@@ -1,0 +1,5 @@
+# Everything here is public portfolio content — nothing to hold back from crawlers.
+User-agent: *
+Allow: /
+
+Sitemap: https://jd-3d-portfolio.netlify.app/sitemap.xml
