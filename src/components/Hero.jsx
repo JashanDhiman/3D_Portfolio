@@ -85,7 +85,7 @@ const ScrollCue = () => {
       href="#about"
       aria-label="Scroll to about section"
       onMouseEnter={scramble}
-      className="group absolute inset-x-0 bottom-10 hidden sm:flex flex-col items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#22d3ee]"
+      className="group w-fit m-auto absolute inset-x-0 bottom-10 hidden sm:flex flex-col items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#22d3ee]"
     >
       <span
         aria-hidden="true"
@@ -154,17 +154,16 @@ const Hero = () => {
               desktop size. "I build software that / handles real patient data." was one
               word too long and wrapped to three, orphaning "data." on its own line. */}
           <h1 className={`${styles.heroHeadText} text-white`}>
-            Software that handles
+            Building
             <br />
             <span className="bg-gradient-to-r from-[#bf61ff] via-[#7aa2f7] to-[#00cea8] bg-clip-text text-transparent">
-              real patient data.
+              healthcare platforms.
             </span>
           </h1>
 
           <p className="mt-6 max-w-xl text-[15px] leading-[28px] text-secondary sm:text-[17px] sm:leading-[30px]">
             React and Node.js on HIPAA-compliant healthcare platforms — FHIR, PHI, and the
-            boundaries data isn&apos;t allowed to cross. Below: notes on what I found
-            profiling this page.
+            boundaries data isn&apos;t allowed to cross.
           </p>
 
           {/* developer manifest — four lines that a recruiter can actually use, rather
@@ -191,7 +190,7 @@ const Hero = () => {
                 {"\n  "}
                 <span className="text-white-100">current</span>:{" "}
                 <span className="font-semibold text-[#00cea8]">
-                  &quot;Senior Software Associate @ SmartData&quot;
+                  &quot;Senior Software Associate @SmartData&quot;
                 </span>
                 ,{"\n"}
                 {"};"}
@@ -201,7 +200,7 @@ const Hero = () => {
 
           {/* calls to action — this used to point at #work, which resolved to the
               experience timeline rather than the projects grid */}
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          {/*<div className="mt-8 flex flex-wrap items-center gap-4">
             <a
               href="#projects"
               className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#804dee] to-[#bf61ff] px-6 py-3 text-[15px] font-bold text-white shadow-[0_10px_30px_-14px_rgba(128,77,238,0.9)] transition-shadow duration-300 hover:shadow-[0_14px_36px_-12px_rgba(191,97,255,0.95)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22d3ee]"
@@ -209,7 +208,7 @@ const Hero = () => {
               View Projects
               <ArrowIcon />
             </a>
-          </div>
+          </div>*/}
 
           {/* Above the fold on purpose: a visitor who only reads the hero should
               still leave with a way to check the code or get in touch. */}

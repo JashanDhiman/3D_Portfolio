@@ -23,7 +23,7 @@ const Navbar = () => {
  return (
   // <header> gives the page a banner landmark, and the nav gets a name so screen-reader
   // users can tell it apart from the footer's navigation in a landmark list.
-  <header className={`${styles.paddingX} w-full flex items-center py-5 fixed top-0 z-20 bg-primary`}>
+  <header className={`${styles.paddingX} w-full flex items-center py-2 fixed top-0 z-20 bg-primary`}>
    <nav aria-label="Main" className="w-full flex justify-between items-center max-w-7xl mx-auto">
     {/* Was a react-router <Link to="">, which existed only to run scrollTo(0,0) —
         the app has no routes. A plain anchor to the hero does the same thing, works

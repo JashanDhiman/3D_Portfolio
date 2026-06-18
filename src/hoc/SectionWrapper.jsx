@@ -3,7 +3,10 @@ import { MotionConfig, motion } from "framer-motion";
 import { styles } from "../styles";
 import { staggerContainer } from "../utils/motion";
 
-const SectionWrapper = (Component, idName) =>
+// `className` lets a single section override the shared rhythm — currently only
+// Contact uses it, to buy back enough vertical space that it and the footer land
+// on one laptop screen together.
+const SectionWrapper = (Component, idName, className = "") =>
  function HOC() {
   return (
    // reducedMotion="user" makes every Framer Motion animation inside a section honour
@@ -28,7 +31,7 @@ const SectionWrapper = (Component, idName) =>
       once: true,
       amount: 0.25,
      }}
-     className={`${styles.padding} max-w-7xl mx-auto relative z-0 scroll-mt-24`}
+     className={`${styles.padding} max-w-7xl mx-auto relative z-0 scroll-mt-24 ${className}`}
     >
      <Component />
     </motion.section>

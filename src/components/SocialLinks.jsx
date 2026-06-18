@@ -56,7 +56,7 @@ const buildLinks = () =>
   social.resumeUrl && {
    key: "resume",
    href: social.resumeUrl,
-   label: "Résumé",
+   label: "Resume",
    Icon: ResumeIcon,
    external: true,
   },

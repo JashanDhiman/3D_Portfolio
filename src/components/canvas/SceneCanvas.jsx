@@ -7,6 +7,7 @@ import { Stars } from "./Stars";
 import { Earth } from "./Earth";
 import TechBalls from "./TechBalls";
 import { setEarthTarget, clearEarthTarget } from "../../utils/earthTarget";
+import useSectionEndProgress from "../../hooks/useSectionEndProgress";
 import { mark } from "../../utils/vitals";
 
 const AnimatedEarth = ({ x, scale }) => {
@@ -136,13 +137,22 @@ const SceneCanvas = ({ tier = "medium", onReady, onContextLost }) => {
 
   const { scrollYProgress } = useScroll();
 
-  // Scroll mapping
+  // The planet's closing move belongs to the contact form, so it has to end where the
+  // form ends. Keying it to scrollYProgress === 1 tied it to the bottom of the document
+  // instead, which meant the swing only completed once the footer was fully on screen
+  // and the form long gone — and every line added to the footer pushed it later still.
+  const contactEnd = useSectionEndProgress("contact");
+
+  // Scroll mapping, as fractions of the journey down to the end of the contact form
+  // rather than of the whole document. useTransform clamps past the last stop, so the
+  // Earth simply holds its final pose while the footer scrolls in underneath it.
   // 0: Hero (Top) - Right
   // 0.1: About section - Scale Down
   // 0.9: last section - Scale Down
-  // 1: Contact (Bottom) - Right, Scale Up
-  const earthX = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [isMobile ? 0 : 7, 0, 0, isMobile ? 0 : 7]);
-  const earthScale = useTransform(scrollYProgress, [0, 0.1, 0.9, 1], [isMobile ? 0.6 : 1, isMobile ? 0.4 : 0.6, isMobile ? 0.4 : 0.6, isMobile ? 0.6 : 1]);
+  // 1: end of the contact form - Right, Scale Up
+  const stops = [0, 0.1 * contactEnd, 0.9 * contactEnd, contactEnd];
+  const earthX = useTransform(scrollYProgress, stops, [isMobile ? 0 : 7, 0, 0, isMobile ? 0 : 7]);
+  const earthScale = useTransform(scrollYProgress, stops, [isMobile ? 0.6 : 1, isMobile ? 0.4 : 0.6, isMobile ? 0.4 : 0.6, isMobile ? 0.6 : 1]);
 
   // The fixed full-viewport wrapper, the CSS backdrop underneath and the
   // capability gate in front all live in SceneBackdrop, which is the only thing

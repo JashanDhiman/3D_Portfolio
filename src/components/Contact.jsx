@@ -8,11 +8,14 @@ import { isValidEmail } from "../utils/extra";
 import SendIcon from "./SendIcon";
 import PlaneFlight from "./PlaneFlight";
 
+// The lg: overrides all pull the same way — trim the form's vertical footprint on
+// laptop screens so this section and the footer land in one viewport together.
+// Touch targets stay above 40px, and phones/tablets keep the roomier spacing.
 const labelClass =
- "mb-2 block text-[10px] font-bold uppercase tracking-[0.16em] text-secondary/80";
+ "mb-2 block text-[10px] font-bold uppercase tracking-[0.16em] text-secondary/80 lg:mb-1.5";
 
 const fieldClass =
- "w-full rounded-lg border border-white/[0.07] bg-[#1b1b2b] px-4 py-3.5 text-[14px] font-medium text-white placeholder:text-secondary/70 outline-none transition-all duration-300 focus:border-[#22d3ee]/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.12)]";
+ "w-full rounded-lg border border-white/[0.07] bg-[#1b1b2b] px-4 py-3.5 text-[14px] font-medium text-white placeholder:text-secondary/70 outline-none transition-all duration-300 focus:border-[#22d3ee]/60 focus:shadow-[0_0_0_3px_rgba(34,211,238,0.12)] lg:py-2.5";
 
 // Reduced-motion path only: how long "Transmitted" holds before the button rearms.
 // The animated path rearms when the plane finishes its run instead.
@@ -119,12 +122,15 @@ const Contact = () => {
      <span className="text-[#804dee]/60">/</span>
      Communication
     </p>
-    <h3 className="mt-4 text-[42px] font-black leading-[1.08] text-white sm:text-[52px]">
+    {/* Steps down from lg up rather than growing: this is the last section before
+        the footer, and at 52px the heading alone pushed the footer off a laptop
+        screen. Phones and tablets keep the full display size. */}
+    <h3 className="mt-4 text-[42px] font-black leading-[1.08] text-white sm:text-[52px] lg:mt-3 lg:text-[38px] xl:text-[52px]">
      Initialize
      <span className="block text-[#22d3ee]">Connection</span>
     </h3>
 
-    <form ref={formRef} onSubmit={handleSubmit} className="mt-10 flex flex-col gap-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="mt-10 flex flex-col gap-5 lg:mt-6 lg:gap-4">
      <label className="block">
       <span className={labelClass}>User.Identification</span>
       <input
@@ -155,6 +161,8 @@ const Contact = () => {
 
      <label className="block">
       <span className={labelClass}>Payload.Content</span>
+      {/* rows sets the intrinsic height, so shrinking it on lg takes an explicit
+          height rather than a smaller min-height. resize-y still works. */}
       <textarea
        rows={5}
        name="message"
@@ -163,7 +171,7 @@ const Contact = () => {
        placeholder="How can we collaborate?"
        aria-label="Message"
        required
-       className={`${fieldClass} min-h-[120px] resize-y`}
+       className={`${fieldClass} min-h-[120px] resize-y lg:h-[96px] lg:min-h-[96px]`}
       />
      </label>
 
@@ -172,7 +180,7 @@ const Contact = () => {
       disabled={status !== "idle"}
       aria-label="Send Message"
       aria-live="polite"
-      className="group relative mt-2 flex w-full items-center justify-center gap-3 rounded-lg bg-gradient-to-r from-[#9b5cf6] via-[#6b46d4] to-[#2b1e5c] py-4 text-[13px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_12px_32px_-14px_rgba(128,77,238,0.9)] transition-all duration-300 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22d3ee] disabled:cursor-not-allowed disabled:hover:brightness-100"
+      className="group relative mt-2 flex w-full items-center justify-center gap-3 rounded-lg lg:mt-1 lg:py-3.5 bg-gradient-to-r from-[#9b5cf6] via-[#6b46d4] to-[#2b1e5c] py-4 text-[13px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_12px_32px_-14px_rgba(128,77,238,0.9)] transition-all duration-300 hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22d3ee] disabled:cursor-not-allowed disabled:hover:brightness-100"
      >
       {/* launch flash, clipped to the button */}
       <span aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden rounded-lg">
@@ -229,4 +237,6 @@ const Contact = () => {
  );
 };
 
-export default SectionWrapper(Contact, "contact");
+// Tighter vertical padding from lg up. The shared sm:py-16 is right for sections
+// you scroll through; the last one before the footer only has to clear the navbar.
+export default SectionWrapper(Contact, "contact", "lg:py-12");
