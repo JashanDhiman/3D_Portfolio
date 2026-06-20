@@ -54,7 +54,7 @@ const NoteCard = ({ note, index }) => (
     <Row label="The problem">{note.problem}</Row>
     <Row label="How it works">{note.approach}</Row>
     <Row label="Trade-off">{note.tradeoff}</Row>
-    {note.detail && <Row label="The detail worth asking about">{note.detail}</Row>}
+    {/*{note.detail && <Row label="The detail worth asking about">{note.detail}</Row>}*/}
 
     <div className="mt-6 flex flex-wrap items-center gap-2">
      {note.files.map((file) => (
@@ -83,7 +83,7 @@ const Notes = () => (
    className="mt-3 max-w-3xl text-[17px] leading-[30px] text-secondary"
   >
    Four decisions from building this site, written up the way I would explain them in a
-   review — the problem, the mechanism, and what I gave up. Every file named below is in
+   review, the problem, the mechanism, and what I gave up. Every file named below is in
    the repository if you would rather read the code than my summary of it.
   </motion.p>
 
