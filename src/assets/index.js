@@ -24,6 +24,7 @@ import shopify from "./company/shopify.webp";
 import cueblocks from "./company/cueblocks.webp";
 import smartdata from "./company/smartdata.webp";
 
+import kegelKlockImg from "./projects/kegel-klock.webp";
 import soundHealerImg from "./projects/sound-healer.webp";
 import wellnessImg from "./projects/fitness.webp";
 import memoriesTimelineImg from "./projects/memories-timeline.webp";
@@ -52,6 +53,7 @@ export {
   shopify,
   cueblocks,
   smartdata,
+  kegelKlockImg,
   soundHealerImg,
   wellnessImg,
   memoriesTimelineImg,

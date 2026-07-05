@@ -16,6 +16,7 @@ import {
   chatWebImg,
   cueblocks,
   smartdata,
+  kegelKlockImg,
   soundHealerImg,
   memoriesTimelineImg,
   wellnessImg,
@@ -164,13 +165,32 @@ const experiences = [
 // `highlights` is the part an interviewer reads, so everything in it is drawn from
 // this repo — the old descriptions, the tech tags, and the experience bullets above.
 // Nothing is inferred beyond that. Where a project has only one honest highlight it
-// gets one; padding it out is how a portfolio starts sounding generated.
+// gets one; padding it out is how a portfolio starts sounding generated. Kegel Klock is
+// the exception to "drawn from this repo": its highlights come from the live site.
 //
 // TODO (you, not me): the two cards marked `needsDepth` are the ones where only you
 // know the interesting decision — a schema you would redo, a bug that took a week, why
 // you picked Firebase over your own backend. Two sentences each turns them from
 // screenshots into interview questions.
 const projects = [
+  {
+    name: "Kegel Klock",
+    featured: true,
+    description:
+      "A doctor-designed pelvic floor programme that runs the exercise session for you, a timer dashboard, daily reminders and audio coaching.",
+    highlights: [
+      "It has the programme steps over 1 to 12 weeks depending on severity, so each user gets their own schedule rather than one fixed plan.",
+      "Installable PWA: a service worker and the Notifications API carry the 1-4 daily reminders. Stripe for subscriptions.",
+    ],
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "pwa", color: "green-text-gradient" },
+      { name: "stripe", color: "pink-text-gradient" },
+    ],
+    image: kegelKlockImg,
+    link: "https://kegelklock.com/",
+    source_code_link: null,
+  },
   {
     name: "Sound Healer",
     featured: true,
@@ -212,10 +232,10 @@ const projects = [
     name: "Trading Dashboard",
     featured: true,
     needsDepth: true,
-    description: "Dashboard for tracking trading activity and reading market trends.",
+    description:
+      "Dashboard for tracking trading activity and reading market trends.",
     highlights: [
-      "React and Firebase, with Tailwind carrying a dense, data-heavy layout.",
-    ],
+      "Implemented a gRPC-based data service using Protocol Buffers and HTTP/2, gaining hands-on experience with strongly typed contracts, efficient binary serialization, low-latency communication, and service-to-service communication.",    ],
     tags: [
       { name: "react", color: "blue-text-gradient" },
       { name: "firebase", color: "green-text-gradient" },
