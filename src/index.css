@@ -70,6 +70,29 @@
  -webkit-text-fill-color: transparent;
 }
 
+/* experience timeline */
+.vertical-timeline::before {
+ background: linear-gradient(180deg, rgba(128, 77, 238, 0) 0%, rgba(128, 77, 238, 0.6) 10%, rgba(0, 206, 168, 0.5) 90%, rgba(0, 206, 168, 0) 100%) !important;
+}
+
+@keyframes exp-border-flow {
+ to {
+  background-position: 200% center;
+ }
+}
+
+@keyframes exp-pulse {
+ 0%,
+ 100% {
+  opacity: 1;
+  transform: scale(1);
+ }
+ 50% {
+  opacity: 0.4;
+  transform: scale(0.75);
+ }
+}
+
 /* canvas- styles */
 .canvas-loader {
  font-size: 10px;
