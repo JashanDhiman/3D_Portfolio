@@ -1,19 +1,57 @@
 import React, { Suspense, useEffect, useState, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Preload } from "@react-three/drei";
 import { useScroll, useTransform } from "framer-motion";
 import { Stars } from "./Stars";
 import { Earth } from "./Earth";
+import { setEarthTarget, clearEarthTarget } from "../../../utils/earthTarget";
 
 const AnimatedEarth = ({ x, scale }) => {
   const groupRef = useRef();
+  const { camera, size } = useThree();
+  // radius of the model at scale 1, measured once the gltf has loaded
+  const unitRadius = useRef(0);
+  const center = useRef(new THREE.Vector3());
+  const edge = useRef(new THREE.Vector3());
+  const right = useRef(new THREE.Vector3());
+
+  useEffect(() => clearEarthTarget, []);
 
   useFrame(() => {
-    if (groupRef.current) {
-      groupRef.current.position.x = x.get();
-      const s = scale.get();
-      groupRef.current.scale.set(s, s, s);
+    const group = groupRef.current;
+    if (!group) return;
+
+    group.position.x = x.get();
+    const s = scale.get();
+    group.scale.set(s, s, s);
+
+    if (!unitRadius.current && group.children.length && s) {
+      const sphere = new THREE.Box3()
+        .setFromObject(group)
+        .getBoundingSphere(new THREE.Sphere());
+      if (sphere.radius > 0) unitRadius.current = sphere.radius / s;
     }
+    if (!unitRadius.current) return;
+
+    // Project the centre and one edge point so overlays get both position and
+    // on-screen radius in CSS pixels (the canvas is fixed inset-0, so canvas
+    // pixels and viewport coordinates are the same thing).
+    group.getWorldPosition(center.current);
+    right.current.setFromMatrixColumn(camera.matrixWorld, 0);
+    edge.current
+      .copy(center.current)
+      .addScaledVector(right.current, unitRadius.current * s);
+
+    center.current.project(camera);
+    edge.current.project(camera);
+
+    const cx = (center.current.x * 0.5 + 0.5) * size.width;
+    const cy = (-center.current.y * 0.5 + 0.5) * size.height;
+    const ex = (edge.current.x * 0.5 + 0.5) * size.width;
+    const ey = (-edge.current.y * 0.5 + 0.5) * size.height;
+
+    setEarthTarget(cx, cy, Math.hypot(ex - cx, ey - cy));
   });
 
   return (
