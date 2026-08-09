@@ -1,4 +1,62 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* Poppins is self-hosted.
+
+   It started as an @import here (a chained, blocking round trip before the font request
+   was even discoverable), then moved to a <link> in index.html. Lighthouse showed the
+   remaining problem: a third-party <link rel="stylesheet"> is still render-blocking, and
+   it measured ~923ms of blocking plus DNS/TLS to two more origins for 1 KB of CSS.
+
+   Serving the woff2 files ourselves removes the blocking stylesheet, the two extra
+   origins and the third-party dependency. Only the latin subset ships (5 weights,
+   ~38 KB): the content is English, and its typographic characters — em dash, curly
+   quotes, ellipsis — all sit in U+2000-206F, which the range below covers. latin-ext
+   would be ~38 KB per weight instead of ~8 KB for accented letters nothing here uses.
+
+   Regenerate with scripts/fetch-fonts.mjs if the weights ever change. */
+
+@font-face {
+ font-family: "Poppins";
+ font-style: normal;
+ font-weight: 400;
+ font-display: swap;
+ src: url("/fonts/poppins-400-latin.woff2") format("woff2");
+ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+ font-family: "Poppins";
+ font-style: normal;
+ font-weight: 500;
+ font-display: swap;
+ src: url("/fonts/poppins-500-latin.woff2") format("woff2");
+ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+ font-family: "Poppins";
+ font-style: normal;
+ font-weight: 600;
+ font-display: swap;
+ src: url("/fonts/poppins-600-latin.woff2") format("woff2");
+ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+ font-family: "Poppins";
+ font-style: normal;
+ font-weight: 700;
+ font-display: swap;
+ src: url("/fonts/poppins-700-latin.woff2") format("woff2");
+ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+ font-family: "Poppins";
+ font-style: normal;
+ font-weight: 900;
+ font-display: swap;
+ src: url("/fonts/poppins-900-latin.woff2") format("woff2");
+ unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 @tailwind base;
 @tailwind components;
@@ -9,14 +67,101 @@
  padding: 0;
  box-sizing: border-box;
  font-family: "Poppins", sans-serif;
- scroll-behavior: smooth;
  color-scheme: dark;
 }
 
-.hash-span {
- margin-top: -100px;
- padding-bottom: 100px;
- display: block;
+/* scroll-behavior belongs on the scroll container, not on every element. On `*` it was
+   applied ~thousands of times to elements that never scroll, and it also overrode the
+   smooth/instant choice for any nested scroller. */
+html {
+ scroll-behavior: smooth;
+}
+
+/* Reduced motion is handled in three places, because each needs a different mechanism:
+   Framer Motion via MotionConfig in SectionWrapper, the 3D scene by declining to start
+   at all in SceneBackdrop, and the decorative CSS keyframes here. Without this block the
+   pulsing dots, the scroll-cue beam and the card border flow keep looping regardless. */
+@media (prefers-reduced-motion: reduce) {
+ html {
+  scroll-behavior: auto;
+ }
+
+ *,
+ *::before,
+ *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+ }
+}
+
+/* .hash-span removed. It existed to offset the fixed navbar with
+   margin-top:-100px / padding-bottom:100px on an empty &nbsp; span inside every
+   section; scroll-margin-top on the section itself does the same job without the
+   phantom element. See src/hoc/SectionWrapper.jsx. */
+
+/* Some people reduce transparency because layered translucent surfaces are genuinely
+   hard to read, not as a preference. backdrop-filter is also one of the more expensive
+   things a compositor can be asked to do, so honouring this helps twice. Only the hero's
+   code panel uses it; it becomes a solid panel rather than losing its styling. */
+@media (prefers-reduced-transparency: reduce) {
+ .backdrop-blur-sm,
+ .backdrop-blur {
+  backdrop-filter: none;
+  background-color: #0d0920;
+ }
+}
+
+/* Static stand-in for the 3D backdrop. Drawn with gradients rather than an image
+   so it weighs nothing, needs no GPU and cannot fail to load. It is the load
+   state, and it is the permanent background when WebGL is unavailable or the
+   visitor asked for reduced motion. */
+.scene-poster {
+ background-color: #050816;
+ background-image:
+  radial-gradient(circle 1px at 34px 42px, rgba(255, 255, 255, 0.55) 99%, transparent 100%),
+  radial-gradient(circle 1px at 168px 128px, rgba(242, 115, 200, 0.45) 99%, transparent 100%),
+  radial-gradient(circle 1px at 96px 214px, rgba(255, 255, 255, 0.35) 99%, transparent 100%),
+  radial-gradient(circle 1.5px at 262px 88px, rgba(170, 166, 195, 0.4) 99%, transparent 100%),
+  radial-gradient(125% 95% at 50% 42%, transparent 52%, rgba(5, 8, 22, 0.9) 100%);
+ background-size: 250px 250px, 250px 250px, 250px 250px, 430px 430px, 100% 100%;
+ background-repeat: repeat, repeat, repeat, repeat, no-repeat;
+}
+
+/* Only when the poster is carrying the page on its own does it add the planet
+   glow — layering this under a live canvas would read as a second, fake planet. */
+.scene-poster::before {
+ content: "";
+ position: absolute;
+ inset: 0;
+ opacity: 0;
+ transition: opacity 600ms ease;
+ background-image:
+  radial-gradient(34rem 34rem at 78% 34%, rgba(129, 94, 255, 0.22), transparent 68%),
+  radial-gradient(22rem 22rem at 80% 32%, rgba(0, 206, 168, 0.14), transparent 62%);
+}
+
+.scene-poster[data-solo="true"]::before {
+ opacity: 1;
+}
+
+/* SceneBackdrop stamps data-scene="live" on <html> once the WebGL scene is actually
+   painting. The Tech grid's flat icons are the baseline content and stay visible in
+   every other case — phone, no WebGL, reduced motion, lost context, still loading —
+   and only step aside when the 3D balls are really there to dock in their place.
+   Driven by an attribute and CSS rather than React state so the swap costs no render. */
+.tech-flat-icon {
+ transition: opacity 400ms ease;
+}
+
+html[data-scene="live"] .tech-flat-icon {
+ opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+ .tech-flat-icon {
+  transition: none;
+ }
 }
 
 .black-gradient {
@@ -128,50 +273,6 @@
  }
 }
 
-/* canvas- styles */
-.canvas-loader {
- font-size: 10px;
- width: 1em;
- height: 1em;
- border-radius: 50%;
- position: relative;
- text-indent: -9999em;
- animation: mulShdSpin 1.1s infinite ease;
- transform: translateZ(0);
-}
-
-@keyframes mulShdSpin {
- 0%,
- 100% {
-  box-shadow: 0em -2.6em 0em 0em #ffffff, 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.5), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7);
- }
- 12.5% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.7), 1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5);
- }
- 25% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.5), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.7), 2.5em 0em 0 0em #ffffff, 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
- }
- 37.5% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.5), 2.5em 0em 0 0em rgba(255, 255, 255, 0.7), 1.75em 1.75em 0 0em #ffffff,
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
- }
- 50% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.5), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.7),
-   0em 2.5em 0 0em #ffffff, -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.2), -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
- }
- 62.5% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.5),
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.7), -1.8em 1.8em 0 0em #ffffff, -2.6em 0em 0 0em rgba(255, 255, 255, 0.2), -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
- }
- 75% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.5), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.7), -2.6em 0em 0 0em #ffffff, -1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2);
- }
- 87.5% {
-  box-shadow: 0em -2.6em 0em 0em rgba(255, 255, 255, 0.2), 1.8em -1.8em 0 0em rgba(255, 255, 255, 0.2), 2.5em 0em 0 0em rgba(255, 255, 255, 0.2), 1.75em 1.75em 0 0em rgba(255, 255, 255, 0.2),
-   0em 2.5em 0 0em rgba(255, 255, 255, 0.2), -1.8em 1.8em 0 0em rgba(255, 255, 255, 0.5), -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
- }
-}
+/* .canvas-loader and its mulShdSpin keyframes removed with Loader.jsx: that was the
+   in-canvas spinner with the "73%" progress readout, replaced by the CSS backdrop
+   acting as the load state. ~50 lines of keyframes nothing referenced. */

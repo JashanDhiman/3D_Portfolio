@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Single-page site, so there is one URL. The in-page sections are fragments of it, not
+  separate documents, and listing fragments here would be noise rather than coverage.
+  Update the domain here and the absolute URLs in index.html together.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jd-3d-portfolio.netlify.app/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

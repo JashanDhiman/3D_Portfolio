@@ -2,28 +2,109 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/logo.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#050816" />
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Poppins is self-hosted from /fonts (see the note in src/index.css). The Google
+       Fonts <link> that used to be here was render-blocking — Lighthouse measured ~923ms
+       — and cost DNS/TLS to two extra origins for 1 KB of CSS.
+
+       Deliberately NOT preloaded, which is the opposite of the usual advice and was
+       decided by measurement. Preloading the two above-the-fold weights made real FCP on
+       a throttled 1.6 Mbps connection *worse* — 852ms to 956ms — because 16 KB of fonts
+       then competed for bandwidth with the stylesheet and react-vendor at the exact
+       moment those gate the first paint. font-display: swap means text paints in the
+       fallback face regardless, so the fonts have nothing to gain by arriving earlier and
+       everything to lose by crowding out the render-critical bytes.
+
+       Worth knowing that Lighthouse's simulated throttling reported this the other way
+       around; the number above came from an actual throttled load. The @font-face rules
+       in src/index.css are the only thing that requests them. -->
+
   <meta
    name="description"
-   content="Jashan Dhiman - Professional Full Stack Developer & Healthcare Platform Expert. Specialized in React, Node.js, and 3D Web Experiences."
+   content="Jashan Dhiman - Full-Stack Developer with 4 years building HIPAA-compliant healthcare platforms in React and Node.js."
   />
   <meta
    name="keywords"
-   content="Jashan Dhiman, Portfolio, Full Stack Developer, React Developer, Three.js, 3D Web Portfolio, Healthcare Software Engineer"
+   content="Jashan Dhiman, Portfolio, Full Stack Developer, React Developer, Node.js, FHIR, HIPAA, Healthcare Software Engineer, Three.js"
   />
-  <meta property="og:title" content="Jashan Dhiman | 3D Portfolio" />
+  <!-- Absolute URLs below are required: crawlers do not resolve relative paths, and a
+       relative og:image is the most common reason a share card comes out blank. If the
+       site moves to a custom domain, these four URLs and public/sitemap.xml are the only
+       places that need changing. -->
+  <link rel="canonical" href="https://jd-3d-portfolio.netlify.app/" />
+  <meta property="og:url" content="https://jd-3d-portfolio.netlify.app/" />
+  <meta property="og:site_name" content="Jashan Dhiman" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Jashan Dhiman | Full-Stack Developer" />
   <meta
    property="og:description"
-   content="Explore my 3D web portfolio showcasing expertise in React, Node.js, and immersive web solutions."
+   content="4 years building HIPAA-compliant healthcare platforms in React and Node.js. Projects, engineering notes, and contact."
   />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://jd-3d-portfolio.netlify.app/og.png" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta
+   property="og:image:alt"
+   content="Jashan Dhiman, Full-Stack Developer — software that handles real patient data."
+  />
+  <!-- summary_large_image is now correct: there is a real 1200x630 asset behind it.
+       It previously claimed a large card with no image, which renders as a broken
+       preview everywhere it is shared. -->
   <meta name="twitter:card" content="summary_large_image" />
-  <title>Jashan Dhiman | Portfolio</title>
+  <meta name="twitter:image" content="https://jd-3d-portfolio.netlify.app/og.png" />
+
+  <title>Jashan Dhiman | Full-Stack Developer</title>
+
+  <!-- Person schema so search results can attribute the work and the profile links.
+       Kept to facts stated elsewhere on the page. -->
+  <script type="application/ld+json">
+   {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jashan Dhiman",
+    "url": "https://jd-3d-portfolio.netlify.app/",
+    "image": "https://jd-3d-portfolio.netlify.app/og.png",
+    "jobTitle": "Full-Stack Developer",
+    "email": "mailto:jashandhiman.hulk@gmail.com",
+    "description": "Full-Stack Developer building HIPAA-compliant healthcare platforms in React and Node.js.",
+    "knowsAbout": [
+     "React",
+     "Node.js",
+     "TypeScript",
+     "PostgreSQL",
+     "MongoDB",
+     "FHIR",
+     "HIPAA",
+     "Three.js",
+     "Web performance"
+    ],
+    "sameAs": ["https://github.com/JashanDhiman"]
+   }
+  </script>
  </head>
- <body>
+ <!-- Painted inline so the dark ground is up before any stylesheet lands,
+      instead of flashing white on a slow connection. -->
+ <body style="background-color: #050816">
   <div id="root"></div>
+  <noscript>
+   <div style="max-width: 42rem; margin: 0 auto; padding: 4rem 1.5rem; color: #f3f3f3; font-family: system-ui, sans-serif">
+    <h1 style="font-size: 2rem; margin-bottom: 1rem">Jashan Dhiman — Full-Stack Developer</h1>
+    <p style="color: #aaa6c3; line-height: 1.7">
+     4 years building HIPAA-compliant healthcare platforms in React and Node.js. This portfolio
+     needs JavaScript for its interactive sections — you can reach me directly at
+     <a href="mailto:jashandhiman.hulk@gmail.com" style="color: #915eff">jashandhiman.hulk@gmail.com</a>
+     or browse my code at
+     <a href="https://github.com/JashanDhiman" style="color: #915eff">github.com/JashanDhiman</a>.
+    </p>
+   </div>
+  </noscript>
   <script type="module" src="/src/main.jsx"></script>
  </body>
 </html>
