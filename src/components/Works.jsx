@@ -20,8 +20,13 @@ const IconLink = ({ href, icon, children }) => (
   </a>
 );
 
+// Deliberately the same object shape SectionWrapper uses. framer-motion pools
+// IntersectionObservers by serialised options, so matching them means every card joins
+// the single observer the sections already share rather than allocating its own — the
+// cost of a per-card trigger is one extra observe() call, not one extra observer.
+const CARD_VIEWPORT = { once: true, amount: "some", margin: "0px 0px -100px 0px" };
+
 export const ProjectCard = ({
-  index,
   name,
   description,
   highlights,
@@ -31,7 +36,22 @@ export const ProjectCard = ({
   link,
 }) => {
   return (
-    <motion.div variants={fadeIn("up", "spring", index * 0.25, 0.75)}>
+    // Each card watches for its own arrival instead of inheriting the section's single
+    // reveal. Stacked full-width, this section is nearly five viewports tall on a phone,
+    // so one section-level trigger meant the last cards finished animating four screens
+    // before anyone scrolled to them.
+    //
+    // The old index * 0.25 delay went with it: staggering off the section's arrival only
+    // works when the whole group arrives together. With a per-card trigger that delay
+    // would run down while the card was already on screen. Cards sharing a row still
+    // arrive on the same scroll position and animate together, so the wrapped desktop
+    // layout still reads as a row rising as one.
+    <motion.div
+      initial="hidden"
+      whileInView="show"
+      viewport={CARD_VIEWPORT}
+      variants={fadeIn("up", "spring", 0, 0.75)}
+    >
       <Tilt
         tiltMaxAngleX={10}
         tiltMaxAngleY={10}
@@ -116,8 +136,8 @@ const Works = () => {
         </motion.p>
       </div>
       <div className="mt-20 flex flex-wrap items-stretch gap-7">
-        {projects.map((project, index) => (
-          <ProjectCard key={project.name} index={index} {...project} />
+        {projects.map((project) => (
+          <ProjectCard key={project.name} {...project} />
         ))}
       </div>
     </>
