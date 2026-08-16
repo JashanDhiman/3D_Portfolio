@@ -33,7 +33,9 @@ const parseMoment = (value = "") => {
   }
 
   const match = trimmed.match(/^([a-z]+)\.?\s+(\d{4})$/i);
-  const month = match ? MONTH_INDEX[match[1].slice(0, 3).toLowerCase()] : undefined;
+  const month = match
+    ? MONTH_INDEX[match[1].slice(0, 3).toLowerCase()]
+    : undefined;
   if (month === undefined) return null;
 
   const short = match[1].slice(0, 3);
@@ -55,7 +57,11 @@ const describeTenure = (raw = "") => {
   const [rawStart, rawEnd] = raw.split(/\s*[-–—]\s*/);
   const start = parseMoment(rawStart);
   const end = parseMoment(rawEnd);
-  const fallback = { range: raw, duration: null, present: PRESENT.test((rawEnd || "").trim()) };
+  const fallback = {
+    range: raw,
+    duration: null,
+    present: PRESENT.test((rawEnd || "").trim()),
+  };
   if (!start || !end) return fallback;
 
   const months =
@@ -71,16 +77,44 @@ const describeTenure = (raw = "") => {
 };
 
 const CalendarIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-3.5 w-3.5 shrink-0">
-    <rect x="3" y="5" width="18" height="16" rx="3" stroke="currentColor" strokeWidth="1.8" />
-    <path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    className="h-3.5 w-3.5 shrink-0"
+  >
+    <rect
+      x="3"
+      y="5"
+      width="18"
+      height="16"
+      rx="3"
+      stroke="currentColor"
+      strokeWidth="1.8"
+    />
+    <path
+      d="M3 10h18M8 3v4M16 3v4"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
 const ClockIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" className="h-3.5 w-3.5 shrink-0">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+    className="h-3.5 w-3.5 shrink-0"
+  >
     <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-    <path d="M12 7v5.2l3.2 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    <path
+      d="M12 7v5.2l3.2 2"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+    />
   </svg>
 );
 
@@ -103,7 +137,9 @@ const ExperienceCard = ({ experience }) => {
       contentArrowStyle={{ borderRight: "10px solid rgba(128, 77, 238, 0.45)" }}
       date={
         <span className="inline-flex items-center gap-2">
-          <span className="text-[13px] font-bold tracking-[0.14em] text-white-100">{range}</span>
+          <span className="text-[13px] font-bold tracking-[0.14em] text-white-100">
+            {range}
+          </span>
           {duration && (
             <span className="text-[11px] font-semibold tracking-[0.14em] text-secondary/80">
               · {duration}
@@ -145,6 +181,12 @@ const ExperienceCard = ({ experience }) => {
               <h3 className="text-[22px] font-black leading-tight text-white sm:text-[25px]">
                 {experience.title}
               </h3>
+            </div>
+
+            <div className="mt-1 flex justify-between gap-3">
+              <p className="!m-0 bg-gradient-to-r from-[#00cea8] via-[#7aa2f7] to-[#bf61ff] bg-clip-text text-[15px] font-bold tracking-wide text-transparent">
+                {experience.company_name}
+              </p>
               {present && (
                 <span className="flex items-center gap-1.5 rounded-full border border-[#00cea8]/40 bg-[#00cea8]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#00cea8]">
                   <span className="h-1.5 w-1.5 animate-[exp-pulse_1.8s_ease-in-out_infinite] rounded-full bg-[#00cea8] shadow-[0_0_10px_#00cea8]" />
@@ -152,10 +194,6 @@ const ExperienceCard = ({ experience }) => {
                 </span>
               )}
             </div>
-
-            <p className="mt-1.5 bg-gradient-to-r from-[#00cea8] via-[#7aa2f7] to-[#bf61ff] bg-clip-text text-[15px] font-bold tracking-wide text-transparent">
-              {experience.company_name}
-            </p>
 
             {/* 1170px is react-vertical-timeline's own breakpoint: below it the
                 side date is hidden, so the meta row carries the dates instead. */}
@@ -214,7 +252,10 @@ const ExperienceCard = ({ experience }) => {
                 </blockquote>
                 <figcaption className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-secondary">
                   {experience.testimonial.name}
-                  <span className="text-secondary/80"> · {experience.testimonial.designation}</span>
+                  <span className="text-secondary/80">
+                    {" "}
+                    · {experience.testimonial.designation}
+                  </span>
                 </figcaption>
               </figure>
             )}

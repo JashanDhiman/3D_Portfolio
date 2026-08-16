@@ -83,6 +83,49 @@ const technologies = [
 
 const experiences = [
   {
+    title: "Senior Software Associate",
+    company_name: "SmartData",
+    icon: smartdata,
+    iconBg: "#383E56",
+    date: "nov 2022 - Present",
+    technologies: [
+      "React.js",
+      "Node.js",
+      "FastAPI",
+      "FHIR",
+      "HIPAA",
+      "PHI",
+      "Code Review",
+    ],
+    points: [
+      "Developing and maintaining Healthcare Platforms using React.js and nodeJS with taking-care of FHIR, HIPAA and PHI.",
+      "Architecting scalable solutions for handling large volumes of healthcare data, through efficient data modeling and API design.",
+      "Developing Front-end with server-side logic.",
+      "Collaborating with cross-functional teams including designers, project managers, and other developers to create high-quality Healthcare platforms.",
+      "Participating in code reviews and providing constructive feedback to other developers.",
+    ],
+  },
+  {
+    title: "Web Developer",
+    company_name: "Cue Blocks",
+    icon: cueblocks,
+    iconBg: "#383E56",
+    date: "feb 2022 - nov 2022",
+    technologies: [
+      "React.js",
+      "JavaScript",
+      "Shopify Apps",
+      "Responsive UI",
+      "Cross-browser",
+    ],
+    points: [
+      "Developed and maintained web applications using React.js and Node.js.",
+      "Implemented responsive design and ensured cross-browser compatibility.",
+      "Together with my senior colleagues, I have successfully developed a customized Shopify app that aims to provide our customers with exceptional additional services and elevate their overall shopping experience.",
+      "This app not only enhances existing projects but also offers a more productive, customized and efficient code to customer's Store.",
+    ],
+  },
+  {
     title: "Freelance Full Stack Developer",
     // TODO: swap for the real NirvanaSage logo once available (src/assets/company/)
     company_name: "NirvanaSage",
@@ -114,48 +157,6 @@ const experiences = [
       name: "Suneet Joshi",
       designation: "Founder, NirvanaSage",
     },
-  },
-  {
-    title: "Web Developer",
-    company_name: "Cue Blocks",
-    icon: cueblocks,
-    iconBg: "#383E56",
-    date: "feb 2022 - nov 2022",
-    technologies: [
-      "React.js",
-      "JavaScript",
-      "Shopify Apps",
-      "Responsive UI",
-      "Cross-browser",
-    ],
-    points: [
-      "Developed and maintained web applications using React.js and other related technologies.",
-      "Implemented responsive design and ensured cross-browser compatibility.",
-      "Together with my senior colleagues, I have successfully developed a customized Shopify app that aims to provide our customers with exceptional additional services and elevate their overall shopping experience.",
-      "This app not only enhances existing projects but also offers a more productive, customized and efficient code to customer's Store.",
-    ],
-  },
-  {
-    title: "Senior Software Associate",
-    company_name: "SmartData",
-    icon: smartdata,
-    iconBg: "#383E56",
-    date: "nov 2022 - Present",
-    technologies: [
-      "React.js",
-      "Node.js",
-      "FHIR",
-      "HIPAA",
-      "PHI",
-      "Code Review",
-    ],
-    points: [
-      "Developing and maintaining Healthcare Platforms using React.js and nodeJS with taking-care of FHIR, HIPAA and PHI.",
-      "Optimizing application for maximum speed and scalability.",
-      "Developing Front-end with server-side logic.",
-      "Collaborating with cross-functional teams including designers, project managers, and other developers to create high-quality Healthcare platforms.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
   },
 ];
 
@@ -198,7 +199,7 @@ const projects = [
       "Generates personalised therapeutic audio intended to help users shift their mental state.",
     highlights: [
       "Built for NirvanaSage over a two-year engagement, working directly with the founder.",
-      "Signal processing generates the audio for depression, anxiety and stress; the voice-analysis step reached 80% accuracy.",
+      "Signal processing generates the audio for depression, anxiety and stress, the voice-analysis step reached 80% accuracy.",
       "Per-user sound profiles driven through the browser Audio API over a REST backend.",
     ],
     tags: [
@@ -211,12 +212,30 @@ const projects = [
     source_code_link: null,
   },
   {
+    name: "Trading Dashboard",
+    featured: true,
+    needsDepth: true,
+    description:
+      "Dashboard for tracking trading activity and reading market trends.",
+    highlights: [
+      "Implemented a gRPC-based data service using Protocol Buffers and HTTP/2, gaining hands-on experience with strongly typed contracts, efficient binary serialization, low-latency communication, and service-to-service communication.",
+    ],
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "firebase", color: "green-text-gradient" },
+      { name: "tailwind", color: "pink-text-gradient" },
+    ],
+    image: tradingDashboardImg,
+    link: "https://nubra-dashboard.vercel.app",
+    source_code_link: "https://github.com/JashanDhiman/trading-dashboard",
+  },
+  {
     name: "Memories Timeline",
     featured: true,
     description:
-      "Upload a set of photos and revisit them as a scroll-driven journey — a boat sailing downriver past each memory.",
+      "Upload a set of photos and revisit them as a scroll-driven journey, a boat sailing downriver past each memory.",
     highlights: [
-      "The whole timeline is scroll-driven: GSAP maps scroll position onto the boat's path and onto when each memory reveals.",
+      "In this i learned to create, manupulate SVGs, rendering them through GSAP and animate them.",
       "Images are uploaded by the user through a REST API rather than bundled with the build.",
     ],
     tags: [
@@ -227,23 +246,6 @@ const projects = [
     image: memoriesTimelineImg,
     link: "https://memories-timeline.netlify.app/",
     source_code_link: "https://github.com/JashanDhiman/memories-timeline",
-  },
-  {
-    name: "Trading Dashboard",
-    featured: true,
-    needsDepth: true,
-    description:
-      "Dashboard for tracking trading activity and reading market trends.",
-    highlights: [
-      "Implemented a gRPC-based data service using Protocol Buffers and HTTP/2, gaining hands-on experience with strongly typed contracts, efficient binary serialization, low-latency communication, and service-to-service communication.",    ],
-    tags: [
-      { name: "react", color: "blue-text-gradient" },
-      { name: "firebase", color: "green-text-gradient" },
-      { name: "tailwind", color: "pink-text-gradient" },
-    ],
-    image: tradingDashboardImg,
-    link: "https://nubra-dashboard.vercel.app",
-    source_code_link: "https://github.com/JashanDhiman/trading-dashboard",
   },
   {
     name: "Chat Web App",

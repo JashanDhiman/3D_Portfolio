@@ -162,7 +162,7 @@ const Hero = () => {
           </h1>
 
           <p className="mt-6 max-w-xl text-[15px] leading-[28px] text-secondary sm:text-[17px] sm:leading-[30px]">
-            React and Node.js on HIPAA-compliant healthcare platforms — FHIR, PHI, and the
+            React and Node.js on HIPAA-compliant healthcare platforms, FHIR, PHI, and the
             boundaries data isn&apos;t allowed to cross.
           </p>
 

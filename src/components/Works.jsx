@@ -131,7 +131,7 @@ const Works = () => {
           className="mt-3 max-w-3xl text-[17px] leading-[30px] text-secondary"
         >
           A mix of client work and things I wanted to understand properly. Each one lists
-          what was actually interesting to build rather than a feature tour — live demos and
+          what was actually interesting to build rather than a feature tour, live demos and
           source are linked on every card that has them.
         </motion.p>
       </div>

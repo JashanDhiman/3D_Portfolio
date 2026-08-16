@@ -21,15 +21,15 @@ const About = () => {
     <p className="text-[17px] leading-[30px] text-secondary">
      I&apos;m a full-stack developer working mostly in React and Node.js. Right now I build
      healthcare platforms, where FHIR, HIPAA and PHI handling are part of the day-to-day
-     rather than an afterthought — which mostly means being careful about what data crosses
+     rather than an afterthought, which mostly means being careful about what data crosses
      which boundary, and being able to explain why.
     </p>
-    <p className="text-[17px] leading-[30px] text-secondary">
+    {/*<p className="text-[17px] leading-[30px] text-secondary">
      Before that: Shopify apps at an agency, and freelance product work for a wellness
      startup — a 3D brain visualisation for clinicians, and a sound-therapy app built on
      signal processing. I like problems where the constraint is real, whether that is
      regulated data or a frame budget.
-    </p>
+    </p>*/}
    </motion.div>
   </>
  );
