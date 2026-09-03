@@ -21,6 +21,7 @@ import {
   memoriesTimelineImg,
   wellnessImg,
   tradingDashboardImg,
+  careMeshImg,
 } from "../assets";
 
 // navLinks lives in ./navigation.js — see the note there. This module pulls in
@@ -167,7 +168,8 @@ const experiences = [
 // this repo — the old descriptions, the tech tags, and the experience bullets above.
 // Nothing is inferred beyond that. Where a project has only one honest highlight it
 // gets one; padding it out is how a portfolio starts sounding generated. Kegel Klock is
-// the exception to "drawn from this repo": its highlights come from the live site.
+// the exception to "drawn from this repo": its highlights come from reading the
+// KegelKlock-Website and KegelKlock-Backend source directly.
 //
 // TODO (you, not me): the two cards marked `needsDepth` are the ones where only you
 // know the interesting decision — a schema you would redo, a bug that took a week, why
@@ -178,19 +180,39 @@ const projects = [
     name: "Kegel Klock",
     featured: true,
     description:
-      "A doctor-designed pelvic floor programme that runs the exercise session for you, a timer dashboard, daily reminders and audio coaching.",
+      "A doctor-designed 12-week pelvic floor exercise programme — an installable PWA on React SSR, with an async FastAPI backend and Stripe subscriptions.",
     highlights: [
-      "It has the programme steps over 1 to 12 weeks depending on severity, so each user gets their own schedule rather than one fixed plan.",
-      "Installable PWA: a service worker and the Notifications API carry the 1-4 daily reminders. Stripe for subscriptions.",
+      "Inherited a legacy Node/MongoDB app and rebuilt it on FastAPI and PostgreSQL: reimplementing Node's old cipher in Python meant existing users' encrypted records carried over intact, with no resets.",
+      "Coach audio was drifting out of sync mid-exercise — preloading each session's cues into a shared cache fixed the timing and stopped them re-downloading between sessions.",
+      "Payments had to survive retries and spoofing, so Stripe webhooks are signature-verified and idempotent, and an expired trial is caught in one place and routed to the paywall instead of a dead 401.",
     ],
     tags: [
       { name: "react", color: "blue-text-gradient" },
-      { name: "pwa", color: "green-text-gradient" },
+      { name: "fastapi", color: "green-text-gradient" },
       { name: "stripe", color: "pink-text-gradient" },
     ],
     image: kegelKlockImg,
     link: "https://kegelklock.com/",
     source_code_link: null,
+  },
+  {
+    name: "Clinic Management",
+    featured: true,
+    description:
+      "A multi-tenant healthcare platform for clinic operations — organization and user administration, patient records, scheduling, a live patient queue, remote patient monitoring, virtual visits and clinical questionnaires.",
+    highlights: [
+      "Permissions drive the whole app: the sidebar and the 60+ routes are derived from the signed-in user's permission list, so a super admin, a practitioner and a clinic coordinator each get a different product out of the same build.",
+      "Remote patient monitoring stores vitals in base units and converts per organization on display, so the same reading renders as mg/dL or mmol/L; threshold groups flag anything out of range.",
+    ],
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "redux", color: "green-text-gradient" },
+      { name: "msw", color: "pink-text-gradient" },
+    ],
+    image: careMeshImg,
+    link: "https://clinic-management-software.netlify.app/login",
+    source_code_link:
+      "https://github.com/JashanDhiman/clinic-management-software",
   },
   {
     name: "Sound Healer",

@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef, useState } from "react";
 import { styles } from "../styles";
 import { github, externalLink } from "../assets";
 import SectionWrapper from "../hoc/SectionWrapper";
@@ -26,6 +27,23 @@ const IconLink = ({ href, icon, children }) => (
 // cost of a per-card trigger is one extra observe() call, not one extra observer.
 const CARD_VIEWPORT = { once: true, amount: "some", margin: "0px 0px -100px 0px" };
 
+// Every card's text — description plus highlights — sits in a band of exactly this
+// height, so a row of cards is a row of equals: image, title, body and tag row all line
+// up across the grid and the wordiest project stops deciding how tall its neighbours
+// are. Kegel Klock's four paragraphs are roughly five times the text of Chat Web App's
+// two bullets, and with the row stretching to its tallest member that difference was
+// showing up as dead space in every card beside it.
+//
+// The band clips, it does not truncate: every word stays in the DOM and in the
+// accessibility tree, and the card's own button lifts the clip. That is also why this is
+// a button with aria-expanded rather than the <details>/<summary> disclosure Notes.jsx
+// uses — <details> takes its body out of the tree when closed, so it can hide content
+// but cannot show a clipped preview of it.
+//
+// Only from sm: up. Below that the cards are full width and stacked one per row, so
+// there is no row to line up and clipping would cost content for nothing.
+const BODY_BAND = "sm:h-[14rem]";
+
 export const ProjectCard = ({
   name,
   description,
@@ -35,6 +53,33 @@ export const ProjectCard = ({
   source_code_link,
   link,
 }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [clipped, setClipped] = useState(false);
+  const bodyRef = useRef(null);
+  const bodyId = `project-body-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+
+  // Whether the band actually cuts anything off is a question about wrapped text rather
+  // than about the content: the answer changes with the viewport, and again when Poppins
+  // swaps in for the fallback face. So it is measured, and re-measured by an observer on
+  // the body itself, instead of being inferred from how long the strings are. Measuring
+  // in a layout effect keeps the fade and the button from appearing a frame late.
+  //
+  // Skipped while expanded, where the band is off and every card would measure as having
+  // nothing to hide: `clipped` keeps the value it had while collapsed, which is what
+  // keeps the "Show less" button on screen.
+  useLayoutEffect(() => {
+    if (expanded) return undefined;
+    const body = bodyRef.current;
+    if (!body) return undefined;
+
+    const measure = () => setClipped(body.scrollHeight - body.clientHeight > 1);
+
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(body);
+    return () => observer.disconnect();
+  }, [expanded]);
+
   return (
     // Each card watches for its own arrival instead of inheriting the section's single
     // reveal. Stacked full-width, this section is nearly five viewports tall on a phone,
@@ -85,27 +130,56 @@ export const ProjectCard = ({
           </div>
         </div>
 
-        <div className="mt-5">
-          <h3 className="text-[24px] font-bold text-white">{name}</h3>
-          <p className="mt-2 text-[14px] text-secondary">{description}</p>
+        <h3 className="mt-5 text-[24px] font-bold text-white">{name}</h3>
+
+        <div className="relative">
+          <div id={bodyId} ref={bodyRef} className={`overflow-hidden ${expanded ? "" : BODY_BAND}`}>
+            <p className="mt-2 text-[14px] text-secondary">{description}</p>
+
+            {highlights?.length > 0 && (
+              <ul className="mt-4 space-y-2.5">
+                {highlights.map((point) => (
+                  <li key={point} className="flex gap-2.5 text-[13px] leading-relaxed text-white-100/85">
+                    <span
+                      aria-hidden="true"
+                      className="mt-[6px] h-1.5 w-1.5 shrink-0 rotate-45 rounded-[2px] bg-gradient-to-br from-[#00cea8] to-[#bf61ff]"
+                    />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {/* The last line of a clipped card would otherwise sit there cut in half. The
+              fade reads as "there is more", and the button is absolutely positioned over
+              it so that offering the button costs no layout height — a card with
+              something to expand has to stay exactly as tall as one without. */}
+          {clipped && !expanded && (
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-tertiary via-tertiary/80 to-transparent"
+            />
+          )}
+
+          {clipped && (
+            <button
+              type="button"
+              onClick={() => setExpanded((open) => !open)}
+              aria-expanded={expanded}
+              aria-controls={bodyId}
+              className={`rounded-md bg-tertiary px-2 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#00cea8] transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#22d3ee] ${
+                expanded ? "mt-3" : "absolute bottom-0 right-0"
+              }`}
+            >
+              {expanded ? "Show less" : "Read the detail"}
+            </button>
+          )}
         </div>
 
-        {highlights?.length > 0 && (
-          <ul className="mt-4 space-y-2.5">
-            {highlights.map((point) => (
-              <li key={point} className="flex gap-2.5 text-[13px] leading-relaxed text-white-100/85">
-                <span
-                  aria-hidden="true"
-                  className="mt-[6px] h-1.5 w-1.5 shrink-0 rotate-45 rounded-[2px] bg-gradient-to-br from-[#00cea8] to-[#bf61ff]"
-                />
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
         {/* mt-auto pins the tags to the bottom so cards of differing text length still
-            line their tag rows up */}
+            line their tag rows up. With the band holding collapsed cards to one height it
+            only has work to do while a neighbour in the same row is expanded. */}
         <div className="mt-auto flex flex-wrap gap-2 pt-4">
           {tags?.map((tag) => (
             <p key={tag.name} className={`text-[14px] ${tag.color}`}>
