@@ -30,6 +30,7 @@ import wellnessImg from "./projects/fitness.webp";
 import memoriesTimelineImg from "./projects/memories-timeline.webp";
 import chatWebImg from "./projects/chat-web.webp";
 import tradingDashboardImg from "./projects/trading-dashboard.webp";
+import careMeshImg from "./projects/clinic-management-software.webp";
 
 export {
   logo,
@@ -59,4 +60,5 @@ export {
   memoriesTimelineImg,
   chatWebImg,
   tradingDashboardImg,
+  careMeshImg,
 };
